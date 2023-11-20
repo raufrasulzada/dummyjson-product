@@ -1,6 +1,7 @@
-let url = "https://dummyjson.com/products/?limit=30",
-  listEl = document.querySelector(".list"),
-  productDetailsEl = document.querySelector(".product-details");
+let url = "https://dummyjson.com/products",
+  urllimit = "https://dummyjson.com/products/?limit=30";
+(listEl = document.querySelector(".list")),
+  (productDetailsEl = document.querySelector(".product-details"));
 
 let thisPage = 1;
 let limit = 6;
@@ -77,10 +78,11 @@ fetch(url)
           product.category.charAt(0).toUpperCase() + product.category.slice(1)
         }</div>
         <div class="stock">Stock: ${product.stock}</div>
-        <button onclick="window.location.href='${url}/${
-        product.id
-      }'" class="btn">More Details</button>
-      </div>
+        <button onclick="window.location.href='details.html?id=${
+          product.id
+        }'" class="btn">More Details</button>
+
+
       `;
       listEl.appendChild(productEl);
     });
