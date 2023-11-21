@@ -26,7 +26,7 @@ function listPage() {
 
   if (thisPage != 1) {
     let prev = document.createElement("li");
-    prev.innerText = "PREV";
+    prev.innerText = "Prev";
     prev.setAttribute("onclick", "changePage(" + (thisPage - 1) + ")");
     document.querySelector(".pagination").appendChild(prev);
   }
@@ -42,7 +42,7 @@ function listPage() {
   }
   if (thisPage != count) {
     let next = document.createElement("li");
-    next.innerText = "NEXT";
+    next.innerText = "Next";
     next.setAttribute("onclick", "changePage(" + (thisPage + 1) + ")");
     document.querySelector(".pagination").appendChild(next);
   }

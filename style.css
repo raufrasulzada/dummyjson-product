@@ -5,6 +5,18 @@ body {
   font-family: monospace;
 }
 
+.header {
+  text-align: center;
+  padding: 20px 0;
+  background-image: linear-gradient(to right, #2c3e50, #4ca1af);
+  box-shadow: 5px, 5px, 5px, rgba(0, 0, 0, 0.15);
+  color: #fff;
+}
+
+.header h1 {
+  margin: 0;
+}
+
 .product-list {
   width: 1000px;
   margin: 150px auto 0;
@@ -22,7 +34,6 @@ body {
   width: 200px;
   transition: 0.4s ease;
   border-radius: 30px;
-  /* z-index: 100; */
   cursor: pointer;
 }
 
@@ -80,8 +91,10 @@ body {
 
 .pagination {
   padding: 10px;
+  font-weight: 600;
   text-align: center;
   list-style: none;
+  transition: all 0.4s ease;
 }
 
 .pagination li {
@@ -105,4 +118,39 @@ body {
     rgba(2, 83, 185, 1) 100.2%
   );
   color: #fff;
+}
+
+@media only screen and (max-width: 768px) {
+  .product-list {
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  .list {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    column-gap: 10px;
+  }
+
+  .item .img img {
+    border-radius: 10px;
+  }
+
+  .item .img,
+  .content {
+    padding: 10px;
+  }
+
+  .content {
+    transform: translate(0, -10px);
+  }
+
+  .item:hover img {
+    transform: translate(0, -10px);
+  }
+
+  .pagination li {
+    padding: 5px;
+    margin: 0 3px;
+    border-radius: 3px;
+  }
 }

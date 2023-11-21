@@ -88,3 +88,38 @@ body {
 .btn:hover {
   transform: scale(1.1);
 }
+
+@media only screen and (max-width: 768px) {
+  .product-list {
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  .list {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    column-gap: 10px;
+  }
+
+  .item .img img {
+    border-radius: 10px;
+  }
+
+  .item .img,
+  .content {
+    padding: 10px;
+  }
+
+  .content {
+    transform: translate(0, -10px);
+  }
+
+  .item:hover img {
+    transform: translate(0, -10px);
+  }
+
+  .pagination li {
+    padding: 5px;
+    margin: 0 3px;
+    border-radius: 3px;
+  }
+}
