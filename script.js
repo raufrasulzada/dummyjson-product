@@ -1,5 +1,5 @@
 let url = "https://dummyjson.com/products",
-  urllimit = "https://dummyjson.com/products/?limit=30";
+  urllimit = "https://dummyjson.com/products/?limit=100";
 (listEl = document.querySelector(".list")),
   (productDetailsEl = document.querySelector(".product-details"));
 
@@ -31,7 +31,11 @@ function listPage() {
     document.querySelector(".pagination").appendChild(prev);
   }
 
-  for (i = 1; i <= count; i++) {
+  const maxPg = 5;
+  let startPage = Math.max(1, thisPage - Math.floor(maxPg / 2));
+  let endPage = Math.min(startPage + maxPg - 1, count);
+
+  for (let i = startPage; i <= endPage; i++) {
     let newPage = document.createElement("li");
     newPage.innerText = i;
     if (i == thisPage) {
@@ -40,6 +44,7 @@ function listPage() {
     newPage.setAttribute("onclick", "changePage(" + i + ")");
     document.querySelector(".pagination").appendChild(newPage);
   }
+
   if (thisPage != count) {
     let next = document.createElement("li");
     next.innerText = "Next";
@@ -53,7 +58,7 @@ function changePage(i) {
   loadItem();
 }
 
-fetch(url)
+fetch(urllimit)
   .then((res) => {
     return res.json();
   })
@@ -81,8 +86,6 @@ fetch(url)
         <button onclick="window.location.href='details.html?id=${
           product.id
         }'" class="btn">More Details</button>
-
-
       `;
       listEl.appendChild(productEl);
     });
