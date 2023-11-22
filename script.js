@@ -4,7 +4,10 @@ let url = "https://dummyjson.com/products",
   (productDetailsEl = document.querySelector(".product-details"));
 
 let thisPage = 1;
-let limit = 6;
+let limit = 10;
+let products = [];
+
+const categorySelect = document.getElementById("category-filter");
 
 function loadItem() {
   let beginGet = limit * (thisPage - 1);
@@ -58,22 +61,16 @@ function changePage(i) {
   loadItem();
 }
 
-fetch(urllimit)
-  .then((res) => {
-    return res.json();
-  })
-  .then((data) => {
-    let products = data.products;
-
-    products.forEach((product) => {
-      const productEl = document.createElement("div");
-      productEl.classList.add("item");
-
-      productEl.innerHTML = `
+function displayProducts(prods) {
+  listEl.innerHTML = "";
+  prods.forEach((product) => {
+    const productEl = document.createElement("div");
+    productEl.classList.add("item");
+    productEl.innerHTML = `
       <div class="img">
         <img class="thumbnail" src="${product.thumbnail}" alt="${
-        product.title
-      }">
+      product.title
+    }">
       </div>
       <div class="content">
         <div class="title">${product.title}</div>
@@ -86,10 +83,44 @@ fetch(urllimit)
         <button onclick="window.location.href='details.html?id=${
           product.id
         }'" class="btn">More Details</button>
-      `;
-      listEl.appendChild(productEl);
-    });
+      </div>
+    `;
+    listEl.appendChild(productEl);
+  });
+  thisPage = 1;
+  loadItem();
+}
 
-    loadItem();
+function filtering() {
+  const inputEl = document.getElementById("search-input");
+  const keyword = inputEl.value.toLowerCase();
+  const selectedCategory = categorySelect.value.toLowerCase();
+  const filteredProducts = products.filter((product) => {
+    const title = product.title.toLowerCase().includes(keyword);
+    const description = product.description.toLowerCase().includes(keyword);
+    const category =
+      selectedCategory === "" ||
+      product.category.toLowerCase() === selectedCategory;
+    return (title || description) && category;
+  });
+  displayProducts(filteredProducts);
+}
+
+fetch(urllimit)
+  .then((res) => res.json())
+  .then((data) => {
+    products = data.products;
+    const categoryFilter = document.getElementById("category-filter");
+    const categories = new Set(products.map((product) => product.category));
+    categories.forEach((category) => {
+      const option = document.createElement("option");
+      option.value = category.toLowerCase();
+      option.text = category.charAt(0).toUpperCase() + category.slice(1);
+      categoryFilter.appendChild(option);
+    });
+    const inputEl = document.getElementById("search-input");
+    inputEl.addEventListener("input", filtering);
+    categorySelect.addEventListener("change", filtering);
+    displayProducts(products);
   })
   .catch((error) => console.log(error));
