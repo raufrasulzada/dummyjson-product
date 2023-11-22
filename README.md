@@ -13,11 +13,11 @@ To run the application, ensure you have:
 
 ## Setup
 
-1. **Clone the Repository: **
+1. Clone the Repository:
 
 ```bash
 git clone https://github.com/raufrasulzada/dummyjson-product
 cd dummyjson-product
+```
 
 2.  Open the `index.html` file in your web browser.
-```
