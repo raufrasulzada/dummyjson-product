@@ -137,6 +137,22 @@ body {
   max-width: 100%;
 }
 
+.link-to-github {
+  margin-top: 15px;
+  background-image: linear-gradient(to right, #141e30, #243b55);
+  color: #fff;
+  padding: 15px;
+  width: 10%;
+  border: none;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.link-to-github:hover {
+  transform: scale(1.1);
+}
+
 @media only screen and (max-width: 768px) {
   .product-list {
     width: 90%;
